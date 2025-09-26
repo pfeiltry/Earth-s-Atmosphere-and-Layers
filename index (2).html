@@ -1,0 +1,306 @@
+<!doctype html>
+
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Erdatmosphäre & Erdschichten — Lernseite</title>
+  <meta name="description" content="Übersicht über die Schichten der Erdatmosphäre und der Erde. Interaktive Lernseite auf Deutsch." />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa7bd; --accent:#3ddc97; --glass: rgba(255,255,255,0.04);
+      --maxw:1100px;
+      --round:16px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0; background:linear-gradient(180deg,#07101a 0%, #081426 60%); color:#e6f0ff; -webkit-font-smoothing:antialiased;
+      padding:32px; display:flex; justify-content:center; font-size:16px; line-height:1.5;
+    }.site{max-width:var(--maxw); width:100%;}
+header{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+.logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#1f6feb,#3ddc97);display:flex;align-items:center;justify-content:center;font-weight:700;color:#021121}
+h1{font-size:1.6rem;margin:0}
+p.lead{color:var(--muted);margin:4px 0 0}
+
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+nav a{background:var(--glass);padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font-weight:600;font-size:0.95rem}
+nav a.active{background:linear-gradient(90deg,#123 30%, rgba(255,255,255,0.03) 100%);color:#e6f0ff}
+
+.grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+@media(max-width:980px){.grid{grid-template-columns:1fr} .sidebar{order:-1}}
+
+main{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:20px;border-radius:var(--round); box-shadow:0 6px 20px rgba(1,6,12,0.6)}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:18px;border-radius:12px;margin-bottom:14px}
+
+.diagram{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.svg-wrap{flex:1;min-width:260px}
+svg{width:100%;height:auto;display:block}
+
+h2{margin:0 0 8px}
+h3{margin:0 0 6px}
+.muted{color:var(--muted)}
+
+.layer-list{display:flex;flex-direction:column;gap:10px}
+.layer{padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border-left:6px solid transparent}
+.layer[data-type="troposphere"]{border-left-color:#3ddc97}
+.layer[data-type="stratosphere"]{border-left-color:#6ec1ff}
+.layer[data-type="mesosphere"]{border-left-color:#9b7cff}
+.layer[data-type="thermosphere"]{border-left-color:#ffb86b}
+.layer[data-type="exosphere"]{border-left-color:#b8b8b8}
+
+.sidebar{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);height:100%}
+.metric{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.03)}
+
+.accordion{margin-top:12px}
+.acc-head{display:flex;justify-content:space-between;cursor:pointer;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px}
+.acc-body{padding:10px 12px;display:none;color:var(--muted)}
+
+footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
+
+/* small interactive buttons */
+.btn{display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted);text-decoration:none;font-weight:700}
+.btn-primary{background:linear-gradient(90deg,#1f6feb,#3ddc97);color:#021121}
+
+/* searchbar */
+.search{display:flex;gap:8px;align-items:center}
+input[type=text]{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.01);color:inherit;outline:none}
+
+/* print-friendly */
+@media print{body{background:white;color:black} nav, .sidebar{display:none} .site{max-width:800px}}
+
+  </style>
+</head>
+<body>
+  <div class="site" role="main">
+    <header>
+      <div class="logo" aria-hidden>EA</div>
+      <div>
+        <h1>Erdatmosphäre &amp; Erdschichten</h1>
+        <p class="lead">Eine kompakte, interaktive Lernseite über die Schichten unserer Atmosphäre und die Schichten im Erdinneren. Auf Deutsch.</p>
+      </div>
+    </header><nav aria-label="Hauptnavigation">
+  <a href="#atmosphaere" class="active">Atmosphäre</a>
+  <a href="#erde">Erdschichten</a>
+  <a href="#fakten">Fakten</a>
+  <a href="#quiz">Mini-Quiz</a>
+</nav>
+
+<div class="grid">
+  <main id="content">
+
+    <section id="atmosphaere" class="card" aria-labelledby="atm-h">
+      <h2 id="atm-h">Die Erdatmosphäre</h2>
+      <p class="muted">Die Atmosphäre ist die gasförmige Hülle, die unseren Planeten umgibt. Sie wird in fünf Hauptschichten eingeteilt — von der Erdoberfläche bis in den Weltraum.</p>
+
+      <div class="diagram">
+        <div class="svg-wrap" aria-hidden>
+          <!-- einfache schematische SVG der Atmosphäre (vertikal) -->
+          <svg viewBox="0 0 300 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematische Darstellung der Atmosphärenschichten">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#bfe9ff" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#062031" stop-opacity="0.9"/>
+              </linearGradient>
+            </defs>
+            <rect width="300" height="520" rx="18" fill="#071427" />
+            <!-- layers from bottom to top -->
+            <g transform="translate(20,40)">
+              <rect y="360" width="260" height="100" rx="12" fill="#083" opacity="0.12"/>
+              <text x="20" y="398" fill="#bfe9ff" font-size="12">Troposphäre (0–~12 km)</text>
+
+              <rect y="280" width="260" height="80" rx="12" fill="#1f7cff" opacity="0.10"/>
+              <text x="20" y="320" fill="#cfe9ff" font-size="12">Stratosphäre (bis ~50 km)</text>
+
+              <rect y="200" width="260" height="80" rx="12" fill="#9b7cff" opacity="0.09"/>
+              <text x="20" y="240" fill="#e1d8ff" font-size="12">Mesosphäre (bis ~85 km)</text>
+
+              <rect y="120" width="260" height="80" rx="12" fill="#ffb86b" opacity="0.09"/>
+              <text x="20" y="160" fill="#fff1e0" font-size="12">Thermosphäre (bis ~600 km)</text>
+
+              <rect y="40" width="260" height="80" rx="12" fill="#b8b8b8" opacity="0.08"/>
+              <text x="20" y="80" fill="#f3f3f3" font-size="12">Exosphäre (ab ~600 km)</text>
+
+              <circle cx="230" cy="440" r="18" fill="#ffd54f"/>
+              <text x="200" y="448" font-size="10" fill="#021121">Wetter</text>
+
+            </g>
+          </svg>
+        </div>
+
+        <div style="flex:1;min-width:260px">
+          <div class="layer-list">
+            <div class="layer" data-type="troposphere">
+              <h3>Troposphäre</h3>
+              <p class="muted">Unterste Schicht (0–~12 km). Hier findet Wetter statt; Temperatur sinkt mit der Höhe. Enthält etwa 75 % der Atmosphärenmasse.</p>
+            </div>
+
+            <div class="layer" data-type="stratosphere">
+              <h3>Stratosphäre</h3>
+              <p class="muted">Enthält die Ozonschicht (UV-Absorption). Temperatur steigt in höheren Bereichen wegen Ozonwärmeaufnahme. Verkehrsflugzeuge fliegen oft hier.</p>
+            </div>
+
+            <div class="layer" data-type="mesosphere">
+              <h3>Mesosphäre</h3>
+              <p class="muted">Meteore verglühen oft in dieser Schicht. Temperatur fällt wieder stark.</p>
+            </div>
+
+            <div class="layer" data-type="thermosphere">
+              <h3>Thermosphäre</h3>
+              <p class="muted">Sehr dünne Luft, hohe Temperaturen (aufgrund von Absorption energiereicher Strahlung). Ort von Polarlichtern und der Raumstation ISS (teilweise).</p>
+            </div>
+
+            <div class="layer" data-type="exosphere">
+              <h3>Exosphäre</h3>
+              <p class="muted">Übergang zum Weltraum. Sehr dünn, Partikel können auf Fluchtgeschwindigkeit kommen.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="erde" class="card" aria-labelledby="erde-h">
+      <h2 id="erde-h">Die Schichten der Erde</h2>
+      <p class="muted">Von außen nach innen: Kruste, Mantel, äußerer Kern und innerer Kern. Ihre Eigenschaften unterscheiden sich stark (fest/flüssig, Temperatur, Zusammensetzung).</p>
+
+      <div class="diagram">
+        <div class="svg-wrap" aria-hidden>
+          <!-- einfache Erde Querschnitt SVG -->
+          <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Querschnitt durch die Erde mit Kruste, Mantel, äußerem Kern und innerem Kern">
+            <defs>
+              <radialGradient id="gcore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffd54f"/>
+                <stop offset="100%" stop-color="#ff6f3c"/>
+              </radialGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="transparent" />
+            <g transform="translate(50,10)">
+              <circle cx="200" cy="140" r="120" fill="#143" opacity="0.06" />
+              <circle cx="200" cy="140" r="90" fill="#a75" opacity="0.12" />
+              <circle cx="200" cy="140" r="50" fill="url(#gcore)" />
+
+              <text x="10" y="40" fill="#e6f0ff" font-size="14">Kruste (~5–70 km)</text>
+              <text x="10" y="64" fill="#cfe9ff" font-size="12">Mantel (bis ~2.900 km)</text>
+              <text x="10" y="88" fill="#ffd" font-size="12">Äußerer Kern (flüssig, bis ~5.150 km)</text>
+              <text x="10" y="112" fill="#ffd" font-size="12">Innerer Kern (fest, bis ~6.371 km)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div style="flex:1;min-width:260px">
+          <div class="layer-list">
+            <div class="layer" style="border-left-color:#6ee7b7">
+              <h3>Kruste</h3>
+              <p class="muted">Äußerste Schicht, dünn verglichen mit dem Rest. Enthält die Kontinente und Ozeanböden. Temperaturen sind moderat; Festgestein.</p>
+            </div>
+            <div class="layer" style="border-left-color:#f6b73f">
+              <h3>Mantel</h3>
+              <p class="muted">Besteht aus festem Gestein, das aber über geologische Zeiträume plastisch fließt. Treiber der Plattentektonik.</p>
+            </div>
+            <div class="layer" style="border-left-color:#ff7f50">
+              <h3>Äußerer Kern</h3>
+              <p class="muted">Flüssig, hauptsächlich Eisen und Nickel. Bewegungen hier erzeugen das Magnetfeld der Erde.</p>
+            </div>
+            <div class="layer" style="border-left-color:#ffd54f">
+              <h3>Innerer Kern</h3>
+              <p class="muted">Fest aufgrund des enormen Drucks, besteht aus Eisen-Nickel-Legierung. Sehr hohe Temperaturen.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="fakten" class="card">
+      <h2>Wichtige Fakten & Zahlen</h2>
+      <ul class="muted">
+        <li>Die Atmosphäre besteht hauptsächlich aus Stickstoff (~78 %) und Sauerstoff (~21 %).</li>
+        <li>Die Troposphäre enthält etwa 75 % der Luftmasse und nahezu allen Wasserdampf.</li>
+        <li>Die Erdkruste ist im Durchschnitt nur ~35 km dick unter Kontinenten und ~7 km unter Ozeanen.</li>
+        <li>Das Erdmagnetfeld entsteht durch Konvektion im flüssigen äußeren Kern.</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="card">
+      <h2>Mini-Quiz</h2>
+      <p class="muted">Teste dein Wissen — wähle die richtige Antwort:</p>
+      <div id="quiz-app">
+        <div class="card" style="background:rgba(255,255,255,0.01)">
+          <p><strong>1.</strong> In welcher Schicht findet das meiste Wetter statt?</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" data-answer="troposphäre">Troposphäre</button>
+            <button class="btn" data-answer="stratosphäre">Stratosphäre</button>
+            <button class="btn" data-answer="mesosphäre">Mesosphäre</button>
+          </div>
+          <p id="quiz-feedback" class="muted" style="margin-top:8px"></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <aside class="sidebar" aria-label="Seitenleiste">
+    <div class="card">
+      <h3>Quick Facts</h3>
+      <div class="metric"><span>Hauptbestandteile Luft</span><strong>N₂ 78% · O₂ 21%</strong></div>
+      <div class="metric"><span>Mittlere Erdradius</span><strong>6.371 km</strong></div>
+      <div class="metric"><span>Ozon-Schicht Lage</span><strong>Stratosphäre</strong></div>
+    </div>
+
+    <div class="card">
+      <h3>Interaktive Infos</h3>
+      <div class="accordion">
+        <div class="acc-head">Warum ist die Stratosphäre wichtig? <span>+</span></div>
+        <div class="acc-body">Die Stratosphäre schützt durch die Ozonschicht vor schädlicher UV-Strahlung und beeinflusst dadurch Klima und Leben.</div>
+
+        <div class="acc-head">Wie entsteht das Magnetfeld? <span>+</span></div>
+        <div class="acc-body">Durch Konvektion und Rotation des flüssigen äußeren Kerns (Eisen/Nickel) entsteht die Geodynamowirkung.</div>
+      </div>
+    </div>
+
+  </div> <script>
+    /* Navigation smooth scroll & active state */
+    document.querySelectorAll('nav a').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault(); document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));
+        a.classList.add('active'); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    /* Accordion */
+    document.querySelectorAll('.acc-head').forEach(h=>{
+      h.addEventListener('click', ()=>{
+        const next=h.nextElementSibling; const open = next.style.display === 'block';
+        document.querySelectorAll('.acc-body').forEach(b=>b.style.display='none');
+        document.querySelectorAll('.acc-head span').forEach(s=>s.textContent='+');
+        if(!open){ next.style.display='block'; h.querySelector('span').textContent='−'; }
+      });
+    });
+
+    /* Quiz logic */
+    document.querySelectorAll('#quiz-app .btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const ans=btn.getAttribute('data-answer');
+        const feedback=document.getElementById('quiz-feedback');
+        if(ans.toLowerCase().includes('trop')){
+          feedback.textContent='Richtig — in der Troposphäre findet das meiste Wetter statt.';
+        } else { feedback.textContent='Nicht ganz — versuch es nochmal!'; }
+      });
+    });
+
+    /* Download HTML */
+    document.getElementById('download-btn').addEventListener('click', ()=>{
+      const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});
+      const url=URL.createObjectURL(blob); const a=document.createElement('a');
+      a.href=url; a.download='Erdatmosphaere_und_Erdschichten.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    /* Print */
+    document.getElementById('print-btn').addEventListener('click', ()=>{ window.print(); });
+
+    /* keyboard accessibility for nav */
+    document.addEventListener('keydown', e=>{ if(e.key === 'Home') document.querySelector('nav a').focus(); });
+  </script></body>
+</html>
